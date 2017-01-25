@@ -1,4 +1,4 @@
-package com.conways.game;
+package com.playground.game;
 
 /**
  * Created by chutungyu11 on 1/24/17.
@@ -22,10 +22,7 @@ public class GameOfLife {
         gameboard = new int[i][j];
         for (int ii=0; ii < i; ii++)
             for (int jj=0; jj < j; jj++)
-                if (ii == jj)
-                    gameboard[ii][jj] = 0;
-                else
-                    gameboard[ii][jj] = 1;
+                gameboard[ii][jj] = (int) Math.round(Math.random());
 
     }
 
@@ -138,10 +135,15 @@ public class GameOfLife {
     public static void main(String[] args) {
         System.out.println("Let's play");
 
-        int gameRounds=4;
-        int rows=6;
-        int cols=7;
-        //populate gameboard with inital board
+        int gameRounds=5;
+        int rows=5;
+        int cols=5;
+
+        // invalid
+        if (gameRounds < 1 || rows == 0 || cols == 0) {
+            System.out.println("Invalid input.");
+            System.exit(0);
+        } 
 
         System.out.println("We are going to play " + gameRounds + " with a " + rows + " by " + cols + " gameboard.");
         GameOfLife game = new GameOfLife(rows, cols);

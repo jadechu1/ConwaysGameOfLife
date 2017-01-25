@@ -7,7 +7,7 @@ Rules of Game
  Any live cell with more than three live neighbours dies, as if by overpopulation.
  Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 
-
+```
 Let's play
 We are going to play 3 with a 8 by 8 gameboard.
 Printing initial game board.
@@ -49,3 +49,4 @@ Printing gameboard after Round: 3.
 Thanks for playing.
 
 Process finished with exit code 0
+```

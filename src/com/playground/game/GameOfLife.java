@@ -16,7 +16,6 @@ public class GameOfLife {
 
     private int [][] gameboard; // 0 dead, 1 alive
 
-    // constructor i, j
     // create board and seed dead or alive
     GameOfLife(int i, int j) {
         gameboard = new int[i][j];
@@ -27,26 +26,15 @@ public class GameOfLife {
     }
 
     /*
-
-    method amIDeadOrAlive
+      method amIDeadOrAlive
         input coordinates i, j gameboard cell
         returns int isAlive
-
-        //Checks neighbors for given cell [i,j]
-            Determine start and end point for a 3x3 - make sure to check for boundaries
-            Nested for loops for 3x3
-                if current cell is [i,j], set isAlive (true/falue - true is alive)
-                    break;
-                // check current cell for dead or alive
-                if dead, increment int dead
-                if alive, increment int alive
+        Checks neighbors for given cell [i,j] and track number alive
         //Determine live or die
             if (isAlive and (alive > 3 or alive < 2)) then isAlive = false
             else if (isAlive is false and alive = 3) then isAlive = true
         return isAlive;
-
      */
-
     private int amIDeadOrAlive(int i, int j) {
 
         // figure out start/end i and j for 3x3 cell
@@ -61,20 +49,18 @@ public class GameOfLife {
         // loop through 3x3
         for (int ii=starti; ii<endi; ii++) {
             for (int jj=startj; jj<endj; jj++) {
-
                 // if current position is same as input [i, j], then skip it
                 if (ii==i && jj==j) {
                     result = gameboard[ii][jj];
                     break;
                 }
-
                 // check cell for dead or alive
                 numAliveNeighbors += gameboard[ii][jj];
 
             }
         }
 
-
+        // determine fate
         if (result==1 && (numAliveNeighbors>3 || numAliveNeighbors<2))
             result = 0;
         else if (result == 0 && numAliveNeighbors == 3)
@@ -84,22 +70,10 @@ public class GameOfLife {
     }
 
     /*
-
       playGame
         returns newGameboard
-
-
-        for (int i=0; i<rows; i++) {
-            for (int j=0; j<cols; j++) {
-                newGameboard[i,j] = amIDeadOrAlive(i, j);
-            }
-        }
-        returns newGameboard;
-
-     */
-
+    */
     private int[][] playGame() {
-
         int rows = gameboard.length;
         int cols = gameboard[0].length;
         int[][] newGameboard = new int[rows][cols];
@@ -110,8 +84,6 @@ public class GameOfLife {
             }
         }
         return newGameboard;
-
-
     }
 
     /*
@@ -135,15 +107,15 @@ public class GameOfLife {
     public static void main(String[] args) {
         System.out.println("Let's play");
 
-        int gameRounds=5;
-        int rows=5;
-        int cols=5;
+        int gameRounds=3;
+        int rows=10;
+        int cols=10;
 
         // invalid
         if (gameRounds < 1 || rows == 0 || cols == 0) {
             System.out.println("Invalid input.");
             System.exit(0);
-        } 
+        }
 
         System.out.println("We are going to play " + gameRounds + " with a " + rows + " by " + cols + " gameboard.");
         GameOfLife game = new GameOfLife(rows, cols);

@@ -17,7 +17,7 @@ public class GameOfLife {
     private int [][] gameboard; // 0 dead, 1 alive
 
     // create board and seed dead or alive
-    GameOfLife(int i, int j) {
+    public GameOfLife(int i, int j) {
         gameboard = new int[i][j];
         for (int ii=0; ii < i; ii++)
             for (int jj=0; jj < j; jj++)
@@ -101,15 +101,27 @@ public class GameOfLife {
 
     /*
         main()
-        input gameRounds;
-        //populate gameboard with inital board
+        @param args[0] gameRounds;
+        @param args[1] rows;
+        @param args[2] cols;
+
      */
     public static void main(String[] args) {
         System.out.println("Let's play");
 
         int gameRounds=3;
-        int rows=10;
-        int cols=10;
+        int rows=20;
+        int cols=20;
+
+        // check if theres input
+        int numArgs = args.length;
+        if (numArgs >= 1)
+            gameRounds = Integer.parseInt(args[0]);
+        if (numArgs >= 2)
+            rows = Integer.parseInt(args[1]);
+        if (numArgs >= 3)
+            cols = Integer.parseInt(args[3]);
+
 
         // invalid
         if (gameRounds < 1 || rows == 0 || cols == 0) {
@@ -123,15 +135,12 @@ public class GameOfLife {
         game.printGameboard();
 
         for (int round=0; round<gameRounds; round++) {
-
             game.gameboard = game.playGame();
             System.out.println("Printing gameboard after Round: " + (round+1) + ".");
             game.printGameboard();
-
         }
 
         System.out.println("Thanks for playing.");
-
     }
 
 }

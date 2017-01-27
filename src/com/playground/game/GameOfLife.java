@@ -104,7 +104,6 @@ public class GameOfLife {
         @param args[0] gameRounds;
         @param args[1] rows;
         @param args[2] cols;
-
      */
     public static void main(String[] args) {
         System.out.println("Let's play");
@@ -115,19 +114,12 @@ public class GameOfLife {
 
         // check if theres input
         int numArgs = args.length;
-        if (numArgs >= 1)
-            gameRounds = Integer.parseInt(args[0]);
-        if (numArgs >= 2)
-            rows = Integer.parseInt(args[1]);
-        if (numArgs >= 3)
-            cols = Integer.parseInt(args[3]);
-
-
-        // invalid
-        if (gameRounds < 1 || rows == 0 || cols == 0) {
-            System.out.println("Invalid input.");
-            System.exit(0);
-        }
+        if ((numArgs >= 1) && (args[0].matches("\\d+")))
+            gameRounds = Integer.parseInt(args[0]) >= 0 ? Integer.parseInt(args[0]) : gameRounds;
+        if ((numArgs >= 2) && (args[1].matches("\\d+")))
+            rows = Integer.parseInt(args[1]) > 0 ? Integer.parseInt(args[1]) : rows;
+        if ((numArgs >= 3) && (args[2].matches("\\d+")))
+            cols = Integer.parseInt(args[2]) > 0 ? Integer.parseInt(args[2]) : cols;
 
         System.out.println("We are going to play " + gameRounds + " with a " + rows + " by " + cols + " gameboard.");
         GameOfLife game = new GameOfLife(rows, cols);
